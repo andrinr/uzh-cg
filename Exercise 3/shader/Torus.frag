@@ -6,7 +6,7 @@
 
 
 in vec3 fragColor;
-
+in vec3 normal;
 out vec3 color;
 
 
@@ -15,5 +15,5 @@ void main()
 	// ... uncomment this for color
 	color = fragColor;
 	// ... uncomment this for color according to normals
-	//color = ...;
+	//color = normal;
 }

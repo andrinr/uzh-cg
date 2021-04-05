@@ -1,6 +1,8 @@
 #include "GLExample.h"
 #include "Cube.h"
 #include <iostream>
+#include <chrono>
+
 
 namespace cgCourse
 {
@@ -43,17 +45,12 @@ namespace cgCourse
 
     bool GLExample::update()
     {
-        /*
-         *  TODO: update the cube and the torus with rotations,
-         *        translations and scalings
-         */
-        
+		this->torus->setRotation(0.001, {1,0.8,0.4});
+		this->cube->setRotation(0.002, {0.4,1.0,0.8});
 
-
-        // TODO End
         return true;
     }
-    
+	
 	bool GLExample::render()
 	{
 		glEnable(GL_DEPTH_TEST);
@@ -83,22 +80,23 @@ namespace cgCourse
     void GLExample::renderTorus(){
         programForTorus->bind();
 		this->mvpMatrix = this->viewProjectionMatrix * this->torus->getModelMatrix();
-		/* TODO: add the normal matrix. */
-		
-		// TODO End
+
+		// There is some error in normal matrix. Either here or in the torus.vert shader
+		glm::mat4 normalMatrix = glm::transpose(glm::inverse(this->mvpMatrix));
+		glUniformMatrix4fv(programForTorus->getUniformLocation("normMatrix"), 1, GL_FALSE, &normalMatrix[0][0]);
+
 		glUniformMatrix4fv(programForTorus->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &this->mvpMatrix[0][0]);
         this->torus->draw();
         programForTorus->unbind();
         
-		/*
-		*  TODO: render the line object with the normals of the torus. Use the 
-		*  shaderprogram in "programForTorusNormals" for this.
-		*/
-		
+		// Uncomment to add normal lines
 
+		/*programForTorusNormals->bind();
+		this->mvpMatrix = this->viewProjectionMatrix * this->normalsTorus->getModelMatrix();
 
-
-		// TODO End
+		glUniformMatrix4fv(programForTorusNormals->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &this->mvpMatrix[0][0]);
+        this->normalsTorus->draw();
+        programForTorusNormals->unbind();*/
     }
     
 	bool GLExample::end()

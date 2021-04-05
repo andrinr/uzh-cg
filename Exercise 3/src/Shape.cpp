@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <iostream>
 
 namespace cgCourse
 {
@@ -105,25 +106,26 @@ namespace cgCourse
      */
 	void Shape::setPosition(glm::vec3 _pos)
 	{
-        //...
-
+		glm::mat4 translation = glm::translate(glm::mat4(), _pos);
+		modelMatrix = modelMatrix * translation;
 	}
     
     void Shape::setRotation(float _angle, glm::vec3 _rot)
     {
-		//...
-
+		glm::mat4 rotation = glm::rotate(glm::mat4(), _angle, _rot);
+		modelMatrix = modelMatrix * rotation;
     }
     
     void Shape::setScaling(glm::vec3 _scale)
     {
-		//...
-
+		glm::mat4 scaling = glm::scale(glm::mat4(), _scale);
+		modelMatrix = modelMatrix * scaling;
     }
 
+	// Not really sure why we need this function? the modelMatrix is already updated before that
     void Shape::calculateModelMatrix()
     {
-		//...
+		//... 
     }
     // TODO End
     

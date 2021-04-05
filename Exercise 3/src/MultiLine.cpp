@@ -13,13 +13,18 @@ namespace cgCourse
         /* TODO: Create the multiline object by creating line segments from the
          *       vertices and normals of the incoming object.
          */
-        
-       
+        float length = 0.1;
 
+        for (int i = 0; i < _vertices.size(); i++){
+            this->positions.push_back(_vertices[i]);
+            this->positions.push_back(_vertices[i] + length * _normals[i]);
 
+            this->colors.push_back({0.8f, 0.8f, 0});
+            this->colors.push_back({0.8f, 0.8f, 0});
 
-
-
+             this->lineIndices.push_back({2*i, 2*i+1});
+        }
+    
         // End TODO:
 	}
     
@@ -28,7 +33,7 @@ namespace cgCourse
         // bind the Vertex Array Object and draw the lines
         glBindVertexArray(this->getVertexArrayId());
 		/* TODO: make the draw call for all line indices. */
-        
+        glDrawElements(GL_LINES,  lineIndices.size() * 2, GL_UNSIGNED_INT, 0);
 		// End TODO:
         glBindVertexArray(0);
     }
