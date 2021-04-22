@@ -14,6 +14,7 @@ layout(location = 2) in vec3 vNormal;
 // Tip: Try to use the flat modifier to make color associations of a fragment visible for debugging. 
 out vec3 objectColor;
 out vec3 normal;
+out vec3 lightPosition;
 
 // matrices that stay constant for the whole mesh.
 uniform mat4 modelMatrix;
@@ -22,6 +23,7 @@ uniform mat4 mvpMatrix;
 /* TODO additional variables
  *
  */
+uniform vec3 uLightPosition;
 
 void main(){
 	normal = mat3(transpose(inverse(modelMatrix))) * vNormal;
@@ -37,8 +39,7 @@ void main(){
 	/* TODO add there code for gourand shading
 	*
 	*/
-
-
+	lightPosition = (mvpMatrix * vec4(uLightPosition, 1)).xyz;
 
 
 

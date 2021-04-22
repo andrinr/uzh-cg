@@ -14,26 +14,34 @@ out vec3 color;
 /* TODO fill these structs with values from outside the shader similar
  *      to your matric variables
  */
+in vec3 lightPosition;
+
+uniform vec3 lightColor;
+uniform float ambientIntensity;
+uniform vec3 ambientColor;
+uniform float reflectiveness;
+uniform float shininess;
+uniform float diffuse;
 
 
 void main()
 {
 	// Output color = color specified in the vertex shader,
 	// interpolated between all 3 surrounding vertices
-	color = objectColor;
+	//color = objectColor;
 	//color = normal;
 
 	/* TODO add there code for phong lighting
 	*
 	*/
-	
+	// ambient only
+	color = ambientIntensity * ambientColor * objectColor;
 
+	// diffuse only
+	color = lightColor * diffuse * objectColor * dot(normal, lightPosition);
 
-
-
-
-
-
+	// ambient + diffuse only
+	//color = ambientIntensity * ambientColor * objectColor;
 
 
 
