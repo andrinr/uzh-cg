@@ -14,16 +14,24 @@ layout(location = 2) in vec3 vNormal;
 // Tip: Try to use the flat modifier to make color associations of a fragment visible for debugging. 
 out vec3 objectColor;
 out vec3 normal;
-out vec3 lightPosition;
+out vec3 fragPos;
 
 // matrices that stay constant for the whole mesh.
 uniform mat4 modelMatrix;
 uniform mat4 mvpMatrix;
 
+uniform vec3 lightPosition;
+uniform vec3 viewerPosition;
+
+uniform vec3 lightColor;
+uniform vec3 ambientTerm;
+uniform vec3 diffuseTerm;
+uniform vec3 specularTerm;
+uniform vec3 uLightPosition;
+
 /* TODO additional variables
  *
  */
-uniform vec3 uLightPosition;
 
 void main(){
 	normal = mat3(transpose(inverse(modelMatrix))) * vNormal;
@@ -36,10 +44,18 @@ void main(){
 	// ... uncomment this for color according to normals
 	//objectColor = vNormal;
 
-	/* TODO add there code for gourand shading
-	*
-	*/
-	lightPosition = (mvpMatrix * vec4(uLightPosition, 1)).xyz;
+	fragPos = vec3(modelMatrix*vec4(vPosition, 1));
+
+	vec3 norm = normalize(normal);
+	vec3 lightDir = normalize(lightPosition - fragPos);
+	vec3 viewDir = normalize(viewerPosition - fragPos);
+	vec3 reflectionDir = dot(norm,lightDir) * 2 * norm - lightDir;
+
+	vec3 ambient = ambientTerm * objectColor;
+	vec3 diffuse = diffuseTerm * objectColor * dot(norm, lightDir);
+	// Use max term to avoid backside specular
+	vec3 specular = specularTerm * pow(max(dot(viewDir, reflectionDir),0.0), 5);
+	objectColor = ( ambient + diffuse + specular) * objectColor;
 
 
 

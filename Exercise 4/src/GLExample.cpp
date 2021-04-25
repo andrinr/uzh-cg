@@ -57,7 +57,9 @@ namespace cgCourse
 
 		/* TODO set light info here */
 		// this->light.ambientTerm ...
-
+		this->light.ambientTerm = glm::vec3(0.1,0.1,0.1);
+		this->light.diffuseTerm = glm::vec3(0.6,0.6,0.6);
+		this->light.specularTerm = glm::vec3(0.8,0.8,0.8);
 		// End
 		return constructed;
 	}
@@ -124,6 +126,7 @@ namespace cgCourse
 			this->lightbox->getPosition()[2]
 		);
 
+
 		glUniform3f(
 			_program->getUniformLocation("lightColor"),
 			this->lightboxColor[0],
@@ -131,10 +134,33 @@ namespace cgCourse
 			this->lightboxColor[2]
 		);
 
-		glUniform3f(_program->getUniformLocation("ambientColor"), 1.f, 1.f, 1.f);
+		glUniform3f(
+			_program->getUniformLocation("ambientTerm"),
+			this->light.ambientTerm[0], 
+			this->light.ambientTerm[1], 
+			this->light.ambientTerm[2]
+		);
 
-		glUniform1f(_program->getUniformLocation("ambientIntensity"), 0.3f);
-		glUniform1f(_program->getUniformLocation("diffuse"), 0.55f);
+		glUniform3f(
+			_program->getUniformLocation("diffuseTerm"),
+			this->light.diffuseTerm[0], 
+			this->light.diffuseTerm[1], 
+			this->light.diffuseTerm[2]
+		);
+
+		glUniform3f(
+			_program->getUniformLocation("specularTerm"),
+			this->light.specularTerm[0], 
+			this->light.specularTerm[1], 
+			this->light.specularTerm[2]
+		);
+
+		glUniform3f(
+			_program->getUniformLocation("viewerPosition"),
+			this->cam.getPosition()[0],
+			this->cam.getPosition()[1],
+			this->cam.getPosition()[2]
+		);
 	}
 	// END TODO
 
