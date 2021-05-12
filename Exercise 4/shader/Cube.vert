@@ -46,7 +46,7 @@ void main(){
 
 	fragPos = vec3(modelMatrix*vec4(vPosition, 1));
 
-	vec3 norm = normalize(normal);
+	/*vec3 norm = normalize(normal);
 	vec3 lightDir = normalize(lightPosition - fragPos);
 	vec3 viewDir = normalize(viewerPosition - fragPos);
 	vec3 reflectionDir = dot(norm,lightDir) * 2 * norm - lightDir;
@@ -55,7 +55,7 @@ void main(){
 	vec3 diffuse = diffuseTerm * objectColor * dot(norm, lightDir);
 	// Use max term to avoid backside specular
 	vec3 specular = specularTerm * pow(max(dot(viewDir, reflectionDir),0.0), 5);
-	objectColor = ( ambient + diffuse + specular) * objectColor;
+	objectColor = ( ambient + diffuse + specular) * objectColor;*/
 
 
 

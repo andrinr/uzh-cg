@@ -43,8 +43,8 @@ void main()
 	vec3 diffuse = diffuseTerm * objectColor * dot(norm, lightDir);
 	// Use max term to avoid backside specular
 	vec3 specular = specularTerm * pow(max(dot(viewDir, reflectionDir),0.0), 5);
-	color = ( ambient + diffuse + specular) * objectColor;
+	color = ( ambient + diffuse + specular ) * objectColor;
 
-	color = objectColor;
-	// End TODO 	
+	//color = objectColor;
+	// End TODO
 }

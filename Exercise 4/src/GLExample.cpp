@@ -58,7 +58,7 @@ namespace cgCourse
 		/* TODO set light info here */
 		// this->light.ambientTerm ...
 		this->light.ambientTerm = glm::vec3(0.1,0.1,0.1);
-		this->light.diffuseTerm = glm::vec3(0.6,0.6,0.6);
+		this->light.diffuseTerm = glm::vec3(0.8,0.8,0.8);
 		this->light.specularTerm = glm::vec3(0.8,0.8,0.8);
 		// End
 		return constructed;

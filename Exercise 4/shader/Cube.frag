@@ -30,9 +30,6 @@ void main()
 	color = objectColor;
 	//color = normal;
 
-	/* TODO add there code for phong lighting
-	*
-	*/
 	vec3 norm = normalize(normal);
 	vec3 lightDir = normalize(lightPosition - fragPos);
 	vec3 viewDir = normalize(viewerPosition - fragPos);
@@ -42,14 +39,8 @@ void main()
 	vec3 diffuse = diffuseTerm * objectColor * dot(norm, lightDir);
 	// Use max term to avoid backside specular
 	vec3 specular = specularTerm * pow(max(dot(viewDir, reflectionDir),0.0), 5);
-	color = ( ambient + diffuse + specular) * objectColor;
+	color = ( ambient + diffuse + specular ) * objectColor;
 		
-	color= objectColor;
+	//color = objectColor;
 
-
-
-
-
-
-	// End TODO
 }
