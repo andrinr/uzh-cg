@@ -64,7 +64,7 @@ namespace cgCourse
 		 *   pixel formats.
 		 */
 
-		glGenTextures(1, &this->texhandle);
+		this->bind();
 		glBindTexture(GL_TEXTURE_2D, this->texhandle);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -78,7 +78,7 @@ namespace cgCourse
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->size.x, this->size.y, 0, GL_BGRA, GL_BYTE, data);
 
-		glBindTexture(GL_TEXTURE_2D, 0);
+		this->unbind();
 
 		// End TODO
 

@@ -120,7 +120,7 @@ namespace cgCourse
 		this->renderLightBox();
 
 		this->addLightVariables(programForCube);
-		this->addLightVariables(programForTorus);
+		this->addLightVariables(programForTorus);	
 
         this->renderCubes();
         this->renderTorus();
@@ -147,7 +147,20 @@ namespace cgCourse
 		 *       used with glActiveTexture.
 		 */
 		
+		this->cubetex->bind();
+		glActiveTexture(this->cubetex->getTexHandle());
+		GLint texDiff = programForCube->getUniformLocation("texDiff");
+		glUniform1i(texDiff, 0);
 
+		this->cubetexSpec->bind();
+		glActiveTexture(this->cubetexSpec->getTexHandle());
+		GLint texSpec = programForCube->getUniformLocation("texSpec");
+		glUniform1i(texSpec, 0);
+
+		this->cubetexSpec->bind();
+		glActiveTexture(this->cubetexSpec->getTexHandle());
+		GLint texCoord = programForCube->getUniformLocation("texCoord");
+		glUniform1i(texSpec, 0);
 
 
 		// End TODO
@@ -160,6 +173,8 @@ namespace cgCourse
 		/* TODO: unbind textures by setting all glBindTextures for all active texture layers 
 		 *       to zero.
 		 */
+		this->cubetex->unbind();
+		this->cubetexSpec->unbind();
 		
 
 

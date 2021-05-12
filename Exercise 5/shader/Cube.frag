@@ -14,7 +14,8 @@ in vec2 texCoord;
 
 /* TODO declare texture samplers here */
 
-
+uniform sampler2D texDiff;
+uniform sampler2D texSpec;
 // END TODO
 
 uniform vec3 camPos;
@@ -32,7 +33,7 @@ void main()
 {
     /* TODO modify this piece of source code to make the texture lookup 
        working with the input texture instead of the object color */
-    vec3 colorMap = objectColor;
+    vec3 colorMap = texture(texDiff, texCoord).xyz;
 	
 
 	// END TODO
@@ -59,5 +60,7 @@ void main()
 	 */
 	color = (ambientColor + diffuseColor + specularColor) * colorMap.rgb, 1.0;
 	// End TODO
+
+	color = vec3(texCoord, 1.);
 
 }
