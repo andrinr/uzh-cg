@@ -1,6 +1,7 @@
 #include "Shape.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
 
 namespace cgCourse
 {
@@ -88,6 +89,7 @@ namespace cgCourse
 		// for texture coordinates
 		if (texCoords.size() != 0)
 		{
+			std::cout << texCoords.size() << std::endl;
 			glGenBuffers(1, &texCoordsBufferID);
 			glBindBuffer(GL_ARRAY_BUFFER, texCoordsBufferID);
 			glBufferData(GL_ARRAY_BUFFER, texCoords.size() * sizeof(glm::vec2),

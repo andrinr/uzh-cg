@@ -52,7 +52,7 @@ void main()
 	float specDot = max(dot(viewDir, reflectDir), 0.0);
 	float spec = pow(specDot, 32);
 	float specStrength = 1.0;
-	vec3 specularColor = specStrength * spec * light.specular;
+	vec3 specularColor = texture(texSpec, texCoord).x*4. * spec * light.specular;
 	
 	/* TODO modify this piece of source code if your are using a specular map. 
 	 *      remember that you can also use the color output for debugging of the
@@ -61,6 +61,6 @@ void main()
 	color = (ambientColor + diffuseColor + specularColor) * colorMap.rgb, 1.0;
 	// End TODO
 
-	color = vec3(texCoord, 1.);
+	//color = vec3(texCoord, 1.);
 
 }

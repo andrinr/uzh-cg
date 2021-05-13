@@ -24,7 +24,7 @@ uniform mat4 mvpMatrix;
 
 void main(){
 	/* TODO: set texture coordinates here */
-
+	texCoord = vTexCoords;
 
 	// End TODO
 	

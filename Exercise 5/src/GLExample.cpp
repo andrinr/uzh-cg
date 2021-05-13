@@ -67,10 +67,10 @@ namespace cgCourse
 		 *      already in this class for this purpose.     
 		 */
 		this->cubetex = std::make_shared<Texture>();
-		this->cubetex->loadFromFile(this->getPathToExecutable() + "../../res/Metal_Mesh_006_basecolor.jpg");
+		this->cubetex->loadFromFile(this->getPathToExecutable() + "../../res/Metal_Trimsheet_001_basecolor.jpg");
 
 		this->cubetexSpec = std::make_shared<Texture>();
-		this->cubetexSpec->loadFromFile(this->getPathToExecutable() + "../../res/Metal_Mesh_006_metallic.jpg");
+		this->cubetexSpec->loadFromFile(this->getPathToExecutable() + "../../res/Metal_Trimsheet_001_metallic.jpg");
 
 		this->torustex = std::make_shared<Texture>();
 		this->torustex->loadFromFile(this->getPathToExecutable() + "../../res/Sci-Fi_Padded_Fabric_004_baseColor.jpg");
@@ -157,11 +157,6 @@ namespace cgCourse
 		GLint texSpec = programForCube->getUniformLocation("texSpec");
 		glUniform1i(texSpec, 0);
 
-		this->cubetexSpec->bind();
-		glActiveTexture(this->cubetexSpec->getTexHandle());
-		GLint texCoord = programForCube->getUniformLocation("texCoord");
-		glUniform1i(texSpec, 0);
-
 
 		// End TODO
 
@@ -187,6 +182,16 @@ namespace cgCourse
 		/* TODO: apply the texture and the specular map for the torus as well 
 		 *       analogue to the function above.
 		*/
+
+		this->torustex->bind();
+		glActiveTexture(this->cubetex->getTexHandle());
+		GLint texDiff = programForCube->getUniformLocation("texDiff");
+		glUniform1i(texDiff, 0);
+
+		this->torustexSpec->bind();
+		glActiveTexture(this->cubetexSpec->getTexHandle());
+		GLint texSpec = programForCube->getUniformLocation("texSpec");
+		glUniform1i(texSpec, 0);
 		
 
 
@@ -202,7 +207,9 @@ namespace cgCourse
 		*       to zero.
 		*/
 		
-
+		this->cubetex->unbind();
+		this->cubetexSpec->unbind();
+		
 
 		// End TODO
 
