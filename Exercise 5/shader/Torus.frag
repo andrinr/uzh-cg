@@ -13,7 +13,8 @@ in vec2 texCoord;
 
 /* TODO declare texture samplers here */
 
-
+uniform sampler2D texDiff;
+uniform sampler2D texSpec;
 // END TODO
 
 uniform vec3 camPos;
@@ -31,7 +32,7 @@ void main()
 {
 	/* TODO modify this piece of source code to make the texture lookup 
        working with the input texture instead of the object color */
-    vec3 colorMap = objectColor;
+    vec3 colorMap = texture(texDiff, texCoord).xyz;
 
 	// END TODO
 
@@ -49,7 +50,7 @@ void main()
 	float specDot = max(dot(viewDir, reflectDir), 0.0);
 	float spec = pow(specDot, 16);
 	float specStrength = 1.0;
-	vec3 specularColor = specStrength * spec * light.specular;
+	vec3 specularColor = texture(texSpec, texCoord).x*4. * spec * light.specular;
 
 	/* TODO modify this piece of source code if your are using a specular map. 
 	 *      remember that you can also use the color output for debugging of the

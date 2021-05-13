@@ -24,7 +24,7 @@ uniform mat4 mvpMatrix;
 
 void main(){
 	/* TODO: set texture coordinates for fragment shader here here */
-	
+	texCoord = vTexCoords;
 
 	// End TODO
 

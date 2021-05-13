@@ -144,18 +144,16 @@ namespace cgCourse
 		//       or by using one of the texture functions, e.g. with GL_REPEAT
 
 		//this->texCoords...
-		
-        this->texCoords = {
-			{0.0, 0.0},
-			{0.0, 1.0},
-			{1.0, 1.0},
-			{1.0, 0.0}
-		};
 
-
-		
-
-		// END TODO
+        // calculate positions
+		for (int j = 0; j < circleXZ.getSegments(); j++)
+		{
+			for (int i = 0; i < circleXY.getVertices().size(); i++)
+			{
+                this->texCoords.push_back(glm::vec2(float(i)/circleXY.getSegments(),fractfloat(j)/circleXZ.getSegments()*2.0)%1.0 ));
+			}
+        }
+		// END TO
 	}
     
     void Torus::addTwoFaces(unsigned int _idx0,unsigned int  _idx1,unsigned int  _idx2,unsigned int  _idx3)
