@@ -59,5 +59,6 @@ void main()
 	color = (ambientColor + diffuseColor + specularColor) * colorMap.rgb, 1.0;
 	
 	// End TODO
+	//color = vec3(texCoord, 0.);
 
 }

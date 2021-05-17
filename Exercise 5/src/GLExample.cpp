@@ -146,14 +146,14 @@ namespace cgCourse
 		 *       variable in the shader is meant to be which texture layer when 
 		 *       used with glActiveTexture.
 		 */
-		
+
+		glActiveTexture(GL_TEXTURE0);
 		this->cubetex->bind();
-		glActiveTexture(this->cubetex->getTexHandle());
 		GLint texDiff = programForCube->getUniformLocation("texDiff");
 		glUniform1i(texDiff, 0);
 
+		glActiveTexture(GL_TEXTURE1);
 		this->cubetexSpec->bind();
-		glActiveTexture(this->cubetexSpec->getTexHandle());
 		GLint texSpec = programForCube->getUniformLocation("texSpec");
 		glUniform1i(texSpec, 0);
 
@@ -183,14 +183,14 @@ namespace cgCourse
 		 *       analogue to the function above.
 		*/
 
+		glActiveTexture(GL_TEXTURE0);
 		this->torustex->bind();
-		glActiveTexture(this->cubetex->getTexHandle());
-		GLint texDiff = programForCube->getUniformLocation("texDiff");
+		GLint texDiff = programForTorus->getUniformLocation("texDiff");
 		glUniform1i(texDiff, 0);
 
+		glActiveTexture(GL_TEXTURE1);
 		this->torustexSpec->bind();
-		glActiveTexture(this->cubetexSpec->getTexHandle());
-		GLint texSpec = programForCube->getUniformLocation("texSpec");
+		GLint texSpec = programForTorus->getUniformLocation("texSpec");
 		glUniform1i(texSpec, 0);
 		
 
@@ -207,8 +207,8 @@ namespace cgCourse
 		*       to zero.
 		*/
 		
-		this->cubetex->unbind();
-		this->cubetexSpec->unbind();
+		this->torustex->unbind();
+		this->torustexSpec->unbind();
 		
 
 		// End TODO

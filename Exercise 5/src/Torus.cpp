@@ -150,7 +150,9 @@ namespace cgCourse
 		{
 			for (int i = 0; i < circleXY.getVertices().size(); i++)
 			{
-                this->texCoords.push_back(glm::vec2(float(i)/circleXY.getSegments(),fractfloat(j)/circleXZ.getSegments()*2.0)%1.0 ));
+                this->texCoords.push_back(
+                    glm::vec2(float(i)/circleXY.getVertices().size(),float(j)/circleXZ.getSegments())
+                );
 			}
         }
 		// END TO
