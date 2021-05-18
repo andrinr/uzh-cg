@@ -70,13 +70,13 @@ namespace cgCourse
 		this->cubetex->loadFromFile(this->getPathToExecutable() + "../../res/Metal_Trimsheet_001_basecolor.jpg");
 
 		this->cubetexSpec = std::make_shared<Texture>();
-		this->cubetexSpec->loadFromFile(this->getPathToExecutable() + "../../res/Metal_Trimsheet_001_metallic.jpg");
+		this->cubetexSpec->loadFromFile(this->getPathToExecutable() + "../../res/Metal_Trimsheet_001_roughness.jpg");
 
 		this->torustex = std::make_shared<Texture>();
 		this->torustex->loadFromFile(this->getPathToExecutable() + "../../res/Sci-Fi_Padded_Fabric_004_baseColor.jpg");
 
 		this->torustexSpec = std::make_shared<Texture>();
-		this->torustexSpec->loadFromFile(this->getPathToExecutable() + "../../res/Sci-Fi_Padded_Fabric_004_metallic.jpg");
+		this->torustexSpec->loadFromFile(this->getPathToExecutable() + "../../res/Sci-Fi_Padded_Fabric_004_roughness.jpg");
 		//...
 
 		// End TODO
@@ -93,14 +93,14 @@ namespace cgCourse
 			if (animation > 1.5) {
 				animationDir = Backward;
 			} else {
-				animation += 0.01;
+				animation += 0.001;
 			}
 		} else {
 			if (animation < -3.0) {
 				animationDir = Forward;
 			}
 			else {
-				animation -= 0.01;
+				animation -= 0.001;
 			}
 		}
 		this->lightbox->setPosition(glm::vec3(animation, 0.5, -0.5));
@@ -155,7 +155,7 @@ namespace cgCourse
 		glActiveTexture(GL_TEXTURE1);
 		this->cubetexSpec->bind();
 		GLint texSpec = programForCube->getUniformLocation("texSpec");
-		glUniform1i(texSpec, 0);
+		glUniform1i(texSpec, 1);
 
 
 		// End TODO
@@ -191,7 +191,7 @@ namespace cgCourse
 		glActiveTexture(GL_TEXTURE1);
 		this->torustexSpec->bind();
 		GLint texSpec = programForTorus->getUniformLocation("texSpec");
-		glUniform1i(texSpec, 0);
+		glUniform1i(texSpec, 1);
 		
 
 
