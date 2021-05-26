@@ -73,5 +73,5 @@ void main()
 	// uncomment for rendering without specular map
 	//color = (ambientColor + diffuseColor + specularColor) * colorMap.rgb, 1.0;
 
-	color = normalMap;
+	//color = vNormal.rgb;
 }

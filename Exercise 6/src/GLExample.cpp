@@ -192,7 +192,7 @@ namespace cgCourse
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, this->torustexSpec->getTexHandle());
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, this->cubeNormaltex->getTexHandle());
+		glBindTexture(GL_TEXTURE_2D, this->torusNormaltex->getTexHandle());
 
 		glUniform1i(programForTorus->getUniformLocation("torustex"), 0);
 		glUniform1i(programForTorus->getUniformLocation("torustexSpec"), 1);
