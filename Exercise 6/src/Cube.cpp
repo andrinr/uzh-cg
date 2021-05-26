@@ -183,18 +183,15 @@ namespace cgCourse
 				f * (duv2.y * e1.z - duv1.y * e2.z)
 			};
 
+			/* Assuming orthogonality between tangents and bitangents
 			glm::vec3 bitangent = {
 				f * (-duv2.x * e1.x - duv1.x * e2.x),
 				f * (-duv2.x * e1.y - duv1.x * e2.y),
 				f * (-duv2.x * e1.z - duv1.x * e2.z)
-			};
+			};*/
 
 			this->tangents.push_back(
 				tangent
-			);
-
-			this->tangents.push_back(
-				bitangent
 			);
 		};
     

@@ -10,6 +10,8 @@ in vec3 objectColor;
 in vec3 vertexNormal;
 in vec3 worldPos;
 in vec2 texCoord;
+in vec3 tangent;
+in mat3 TBN;
 
 uniform sampler2D cubetex;
 uniform sampler2D cubetexSpec;
@@ -41,11 +43,9 @@ void main()
 	 *
      */
 	vec3 normalMap = texture(cubeNormaltex, texCoord.xy).rgb;
-    vec3 normal = vertexNormal + normalMap;
+	vec3 normal = normalMap * 2.0 - 1.0; 
+    normal = normalize(TBN * normal);
     
-
-
-
 
     // End TODO
 
@@ -72,4 +72,6 @@ void main()
 	color = (ambientColor + diffuseColor) * colorMap.rgb + (specularColor * specularMap), 1.0;
 	// uncomment for rendering without specular map
 	//color = (ambientColor + diffuseColor + specularColor) * colorMap.rgb, 1.0;
+
+	color = normalMap;
 }

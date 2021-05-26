@@ -74,10 +74,11 @@ namespace cgCourse
         this->cubetexSpec->loadFromFile(this->getPathToExecutable() + "../../res/container_specular.png");
 		this->cubeNormaltex = std::make_shared<Texture>();
         this->cubeNormaltex->loadFromFile(this->getPathToExecutable() + "../../res/container_normal.jpg");
+
         this->torustex = std::make_shared<Texture>();
 		this->torustex->loadFromFile(this->getPathToExecutable() + "../../res/brickwall.jpg");
 		this->torustexSpec = std::make_shared<Texture>();
-		this->torustexSpec->loadFromFile(this->getPathToExecutable() + "../../res/brickwall_normal.jpg");
+		this->torustexSpec->loadFromFile(this->getPathToExecutable() + "../../res/brickwall_specular.jpg");
 		this->torusNormaltex = std::make_shared<Texture>();
         this->torusNormaltex->loadFromFile(this->getPathToExecutable() + "../../res/brickwall_normal.jpg");
 
@@ -157,7 +158,7 @@ namespace cgCourse
 		 *       variable in the shader is meant to be which texture layer when 
 		 *       used with glActiveTexture.
 		 */
-         glUniform1i(programForCube->getUniformLocation("cubteNormaltex"), 2);
+        glUniform1i(programForCube->getUniformLocation("cubeNormaltex"), 2);
 
 		// End TODO
 
@@ -191,7 +192,7 @@ namespace cgCourse
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, this->torustexSpec->getTexHandle());
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, this->torusNormaltex->getTexHandle());
+		glBindTexture(GL_TEXTURE_2D, this->cubeNormaltex->getTexHandle());
 
 		glUniform1i(programForTorus->getUniformLocation("torustex"), 0);
 		glUniform1i(programForTorus->getUniformLocation("torustexSpec"), 1);
