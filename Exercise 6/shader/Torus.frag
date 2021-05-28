@@ -44,7 +44,7 @@ void main()
      */
 
 	vec3 normalMap = texture(torusNormaltex, texCoord.xy).rgb;
-	vec3 normal = normalMap * 2.0 - 1.0; 
+	vec3 normal = normalMap * 2.0 - 1.0;
     normal = normalize(TBN * normal);
     
 
@@ -65,8 +65,8 @@ void main()
 	vec3 reflectDir = reflect(-lightDir, normal);
 	float specDot = max(dot(viewDir, reflectDir), 0.0);
 	float spec = pow(specDot, 32);
-	float specStrength = 1.0;
-	//float specStrength = 0.5; // tweeking the specular strength a bit
+	//float specStrength = 1.0;
+	float specStrength = 1.0; // tweeking the specular strength a bit
 	vec3 specularColor = specStrength * spec * light.specular;
 	
 	/* TODO remember that you can use the color output for debugging tangents, texture coordinates etc.    
@@ -76,5 +76,6 @@ void main()
 	// uncomment for rendering without specular map
 	//color = (ambientColor + diffuseColor + specularColor) * colorMap.rgb, 1.0;
 	// End TODO
-	color = normalMap.rgb;
+	color = normal;
+	//color = vec3(texCoord, 0);
 }

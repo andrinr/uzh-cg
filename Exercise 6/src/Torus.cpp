@@ -151,44 +151,20 @@ namespace cgCourse
 		// There are multiple ways of generating the tangents. Be aware that the normals are interpolated over
 		// all adjacent faces so the tangents at these points will not necessarily follow one of the surface edges.
         
-        for (int i = 0; i < this->faces.size(); i++){
-			int i1 = this->faces[i].x;
-			int i2 = this->faces[i].y;
-			int i3 = this->faces[i].z;
+              // adding texture coordinates for the torus
+        // calculate positions
+        float pi = 3.14159265359;
+		for (int j = 0; j < circleXZ.getSegments(); j++)
+		{
+			for (int i = 0; i < circleXY.getVertices().size(); i++)
+			{
+                float j_ = float(j) / circleXZ.getSegments() * 2.0*pi;
 
-			glm::vec3 v1 = this->positions[i1];
-			glm::vec3 v2 = this->positions[i2];
-			glm::vec3 v3 = this->positions[i3];
-
-			glm::vec2 t1 = this->texCoords[i1];
-			glm::vec2 t2 = this->texCoords[i2];
-			glm::vec2 t3 = this->texCoords[i3];
-
-			glm::vec3 e1 = v2 - v1;
-			glm::vec3 e2 = v3 - v1;
-
-			glm::vec2 duv1 = t2 - t1;
-			glm::vec2 duv2 = t3 - t1;
-
-			float f = 1.0f / (duv1.x * duv2.y - duv2.x * duv1.y);
-
-			glm::vec3 tangent = {
-				f * (duv2.y * e1.x - duv1.y * e2.x),
-				f * (duv2.y * e1.y - duv1.y * e2.y),
-				f * (duv2.y * e1.z - duv1.y * e2.z)
-			};
-
-			/* Assuming orthogonality between tangents and bitangents
-			glm::vec3 bitangent = {
-				f * (-duv2.x * e1.x - duv1.x * e2.x),
-				f * (-duv2.x * e1.y - duv1.x * e2.y),
-				f * (-duv2.x * e1.z - duv1.x * e2.z)
-			};*/
-
-			this->tangents.push_back(
-				tangent
-			);
-		};
+                glm::vec3 tangent = glm::vec3(cos(j_), 0, -sin(j_));
+                //std::cout << tangent.x << tangent.y << tangent.z << std::endl;
+				this->tangents.push_back(tangent);
+			}
+		}
 
 		// END TODO
 	}

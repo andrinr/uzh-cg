@@ -34,12 +34,14 @@ void main(){
 	objectColor = vColor;
 	worldPos = vec3(modelMatrix * vec4(vPosition, 1));
 
+	mat4 normalMatrix = transpose(inverse(modelMatrix));
+
 	/* TODO: calculate the tbn matrix and update the normal here */
-	vertexNormal = normalize(mat3(transpose(inverse(modelMatrix))) * vNormal);
+	vertexNormal = normalize(vec3(normalMatrix * vec4(vNormal, 0.0)));
 
-	vec3 tangent = normalize(vec3(modelMatrix * vec4(vTangent, 1)));
-	vec3 bitangent = normalize(cross(tangent, vNormal));
+	vec3 tangent = normalize(vec3(normalMatrix * vec4(vTangent, 0.0)));
+	vec3 bitangent = normalize(cross(vertexNormal, tangent));
 
-	TBN = mat3(tangent, bitangent, vNormal);
+	TBN = mat3(tangent, bitangent, vertexNormal);
   	// End TODO
 }

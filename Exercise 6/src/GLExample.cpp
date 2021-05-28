@@ -87,21 +87,21 @@ namespace cgCourse
 
     bool GLExample::update()
     {
-		this->torus->setRotation(glm::radians(10.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		this->torus->setRotation(glm::radians(1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 		if(animationDir == Forward)
 		{
 			if (animation > 1.5) {
 				animationDir = Backward;
 			} else {
-				animation += 0.01;
+				animation += 0.002;
 			}
 		} else {
 			if (animation < -4.0) {
 				animationDir = Forward;
 			}
 			else {
-				animation -= 0.01;
+				animation -= 0.002;
 			}
 		}
 		this->lightbox->setPosition(glm::vec3(animation, 0.5, -0.5));
@@ -201,7 +201,7 @@ namespace cgCourse
 		/* TODO: apply the normal map for the torus as well
 		*       analogue to the function above.
 		*/
-		glUniform1i(programForCube->getUniformLocation("torusNormaltex"), 2);
+		glUniform1i(programForTorus->getUniformLocation("torusNormaltex"), 2);
 
 
         // End TODO
