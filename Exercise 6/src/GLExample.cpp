@@ -227,7 +227,7 @@ namespace cgCourse
         // End TODO
 
 		// draw torus normals
-		if(false)
+		if(true)
 		{
 			programForTorusNormals->bind();
 			this->mvpMatrix = this->cam.getViewProjectionMatrix() * this->torus->getModelMatrix();

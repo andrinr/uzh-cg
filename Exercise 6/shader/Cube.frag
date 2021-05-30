@@ -57,14 +57,22 @@ void main()
 	float diffDot = max(dot(normal, lightDir), 0.0);
 	vec3 diffuseColor = diffDot * light.diffuse;
 
-	// specular term (phong version)
+		// Specular
+	float specStrength = 1.0; // tweeking the specular strength a bit
+	int shininess = 16;
 	vec3 viewDir = vec3(normalize(camPos - worldPos));
 	vec3 reflectDir = reflect(-lightDir, normal);
+	vec3 halfwayDir = normalize(lightDir + viewDir);
+
+	// PHONG
 	float specDot = max(dot(viewDir, reflectDir), 0.0);
-	float spec = pow(specDot, 32);
-	float specStrength = 1.0;
-	//float specStrength = 0.5; // tweeking the specular strength a bit
+	float spec = pow(specDot, shininess);
 	vec3 specularColor = specStrength * spec * light.specular;
+
+	// BLINN-PHONG
+	//float specDot = max(dot(normal, halfwayDir), 0.0);
+	//float spec = pow(specDot, shininess);
+	//vec3 specularColor = specStrength * spec * light.specular;	
 	
 	/* TODO remember that you can use the color output for debugging tangents, texture coordinates etc.    
 	 */
@@ -72,6 +80,7 @@ void main()
 	color = (ambientColor + diffuseColor) * colorMap.rgb + (specularColor * specularMap), 1.0;
 	// uncomment for rendering without specular map
 	//color = (ambientColor + diffuseColor + specularColor) * colorMap.rgb, 1.0;
-
+	// End TODO
 	//color = normal;
+	//color = vec3(texCoord, 0);
 }
